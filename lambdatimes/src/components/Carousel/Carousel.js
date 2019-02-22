@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import { carouselData } from "../../data";
+import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 // Complete this Carousel
 export default class Carousel extends Component {
   constructor(props) {
     super(props);
     this.state = {
       images: [],
-      currentIndex: 0
+      currentIndex: 0,
+      goLeft: false
     };
   }
   componentDidMount() {
@@ -17,6 +19,7 @@ export default class Carousel extends Component {
 
   leftClick = () => {
     this.setState(prevState => ({
+      goLeft: true,
       currentIndex:
         prevState.currentIndex === 0
           ? this.state.images.length - 1
@@ -37,8 +40,9 @@ export default class Carousel extends Component {
     return (
       <img
         src={this.state.images[this.state.currentIndex]}
-        style={{ display: "block" }}
+        style={{}}
         alt="random stuff"
+        key={this.state.images[this.state.currentIndex]}
       />
     );
   };
@@ -49,7 +53,15 @@ export default class Carousel extends Component {
         <div className="left-button" onClick={this.leftClick}>
           {"<"}
         </div>
-        {this.selectedImage()}
+
+        <ReactCSSTransitionGroup
+          transitionName="example"
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={300}
+        >
+          {this.selectedImage()}
+        </ReactCSSTransitionGroup>
+
         <div className="right-button" onClick={this.rightClick}>
           {">"}
         </div>
