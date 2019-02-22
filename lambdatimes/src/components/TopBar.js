@@ -14,6 +14,7 @@ const TopBarParent = styled.div`
   position: fixed;
   height: 44px;
   background-color: #333;
+  z-index: 999;
 `;
 const TopBarContainer = styled.div`
   width: 100%;
